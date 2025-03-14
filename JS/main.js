@@ -8,13 +8,13 @@ if (!localStorage.length === null) {
 } else {
     saveQuotes = [];
 }
+async function getQuotes(api) {
+    let data = await fetch(api)
+    .then(res => res.json())
+    .then(data => data);
+    localStorage.setItem('Quotes', JSON.stringify(data))
+}
 getQuoteBtn.addEventListener('click', () => {
-    async function getQuotes(api) {
-        let data = await fetch(api)
-        .then(res => res.json())
-        .then(data => data);
-        localStorage.setItem('Quotes', JSON.stringify(data))
-    }
     getQuotes('https://api.quotable.io/quotes/random')
     showQuotes();
 });
